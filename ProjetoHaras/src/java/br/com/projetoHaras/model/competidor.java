@@ -27,5 +27,23 @@ public class competidor {
     private int id_competidor;
     private String nome;
     private int posicao;
+
+    public int getId_animais() {
+        return id_animais;
+    }
+
+    public void setId_animais(int id_animais) {
+        this.id_animais = id_animais;
+    }
+    private int id_animais;
+
+    public String getModalidade() {
+        return modalidade;
+    }
+
+    public void setModalidade(String modalidade) {
+        this.modalidade = modalidade;
+    }
+    private String modalidade;
     
 }
