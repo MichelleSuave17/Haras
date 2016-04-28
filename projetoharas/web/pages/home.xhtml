@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/modelo_template.xhtml">    
+        <h:outputStylesheet library="css" name="estilo.css"/>
+        <h:outputScript name="jquery-1.11.1.min.js" library="js" />
+        <h:outputScript name="scripts.js" library="js" />
+    <ui:define name="menu">
+     <ui:include src="/includes/menu_principal.xhtml"/>
+    </ui:define>
+
+    <ui:define name="conteudo">
+                <div id="conteudo">
+		<!-- BANNER -->
+		<div id="bannerOut">
+	
+			<div id="bannerMaster">
+			
+			<img id="img" src="_imagens/cavalo.jpg" class="visivel"  />
+			<img id="img" src="_imagens/dailus.jpg"  class="escondido"  />
+			<img id="img" src="_imagens/mac.jpg"  class="escondido"  />
+			</div>		
+		</div>
+                </div>
+        <p:outputLabel id="p">
+            O Mangalarga é hoje uma das mais importantes raças brasileiras, desenvolvida a partir do cruzamento de cavalos das raças Alter e Andaluz, trazidos da Península Ibérica pelos colonizadores. Inicalmente a raça Mangalarga foi criada no sul do estado de Minas Gerais e posteriormente em São Paulo.
+            Contudo, devida a diferença topográfica e cultural da região que exigia do cavalo mais resistência e facilidade de galope, iniciou-se uma nova seleção em outra direção e, devido a isso, o Mangalarga é comumente denominado Mangalarga Paulista, para evitar que se confunda com o Mangalarga Marchador.	A raça Mangalarga foi, então, aperfeiçoada através de novos cruzamentos entre cavalos PSI, Árabe, Anglo-Árabe e American Saddle Horse.
+            O cavalo Mangalarga é um cavalo de sela, destinado principalmente aos esportes hípicos e ao trabalho. É um cavalo extremamente resistente, capaz de percorrer grandes ditâncias.
+            Umas das principais características da raça Mangalarga é a marcha trotada, que diferencia-se do trote por manter um tempo ínfimo de suspensão entre os apoios (quando o animal fica totalmente desligado do solo).
+        </p:outputLabel>
+        <img src="_imagens/cavalo.jpg"/>
+    </ui:define>
+</ui:composition>

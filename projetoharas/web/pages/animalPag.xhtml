@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/modelo_template.xhtml">    
+    <ui:define name="menu">
+        <ui:include src="/includes/menu_principal.xhtml"/>
+    </ui:define>
+    <ui:define name="conteudo">
+        <h:form id="frmAnimal">
+            <p:dataTable emptyMessage="Nenhum animal registrado" 
+                         value="#{MBAnimal.itens}" 
+                         var="item" 
+                         paginator="true" 
+                         rows="5" 
+                         id="tbAnimal">
+                <f:facet name="header">
+                    Animal - Listagem
+                </f:facet>
+                <p:column headerText="Codigo" 
+                          sortBy="#{item.id_animais}" 
+                          filterBy="#{item.id_animais}">
+                    <h:outputText value="#{item.id_animais}"/>
+                </p:column>
+                <p:column headerText="Nome" 
+                          sortBy="#{item.nome}" 
+                          filterBy="#{item.nome}">
+                    <h:outputText value="#{item.nome}"/>
+                </p:column>
+                <p:column headerText="Raça" 
+                          sortBy="#{item.raca}" 
+                          filterBy="#{item.raca}">
+                    <h:outputText value="#{item.raca}"/>
+                </p:column>
+                <p:column headerText="Codigo Competidor">
+                    <p:commandButton icon="ui-icon-trash" oncomplete="PF('dlgEdExcluir').show();" 
+                                     update=":frmExcluiAnimal:pnlExcluiAnimal
+                                     :msgGlobal">
+                        <f:setPropertyActionListener target="#{MBAnimal.animal}" value="#{item}"/>
+                    </p:commandButton>
+                    <p:commandButton icon="ui-icon-pencil" oncomplete="PF('dlgEdAnimal').show();"
+                                     update=":frmEditarAnimal:pnlEditarAnimal
+                                     :msgGlobal">
+                        <f:setPropertyActionListener target="#{MBAnimal.animal}" value="#{item}"/>
+                    </p:commandButton>
+                </p:column>
+                <f:facet name="footer">
+                    <p:commandButton value="Novo" 
+                                     actionListener="#{MBAnimal.prepararAnimal()}" 
+                                     oncomplete="PF('dlgEdNovo').show();" 
+                                     update=":frmCadastraAnimal:pnlCadastraAnimal
+                                     :msgGlobal"/>
+                </f:facet>   
+            </p:dataTable>  
+        </h:form>
+        <!--CADASTRAR -->
+        <p:dialog widgetVar="dlgEdNovo" 
+                  closable="false" 
+                  draggable="false" 
+                  resizable="false" 
+                  header="Novo Animal" 
+                  modal="true" 
+                  appendTo="@(body)">
+            <h:form id="frmCadastraAnimal">
+                <h:panelGrid columns="2" id="pnlCadastraAnimal">
+                    <p:outputLabel value="Raca "/>
+                    <p:inputText size="30" maxlength="50" value="#{MBAnimal.animal.raca}"/>
+                </h:panelGrid>
+                <h:panelGrid columns="2">
+                    <p:commandButton value="Gravar"
+                                     actionListener="#{MBAnimal.novaAnimal()}"
+                                     oncomplete="PF('dlgEdNovo').hide();"
+                                     update=":frmAnimal:tbAnimal
+                                     :msgGlobal"/>
+                    <p:commandButton value="Cancelar" onclick="PF('dlgEdNovo').hide();"/>      
+                </h:panelGrid>
+            </h:form>       
+        </p:dialog> 
+
+        <!--EXCLUIR-->
+        <p:dialog widgetVar="dlgEdExcluir"  closable="false"  draggable="false" 
+                  resizable="false" header="Excluir Animal" modal="true" appendTo="@(body)">
+            <h:form id="frmExcluiCompetidor">
+                
+                <h:panelGrid columns="2" id="pnlExcluiAnimal">
+                    <p:outputLabel value="Código: "/>
+                    <h:outputText value="#{MBAnimal.animal.animal}"/>
+                    <p:outputLabel value="Raca"/>
+                    <h:outputText value="#{MBAnimal.animal.animal}"/>
+                </h:panelGrid>
+                <h:panelGrid columns="2">
+                    <p:commandButton value="Excluir"
+                                     actionListener="#{MBAnimal.excluirAnimal()}"
+                                     oncomplete="PF('dlgEdExcluir').hide();"
+                                     update=":frmAnimal:tbAnimal
+                                     :msgGlobal"/>
+                    <p:commandButton value="Cancelar" onclick="PF('dlgEdExcluir').hide();"/>      
+                </h:panelGrid>
+            </h:form>       
+        </p:dialog> 
+
+
+        <!--EDITAR -->
+        <p:dialog widgetVar="dlgEdEditar" closable="false" draggable="false" 
+                  resizable="false"  header="Editar Animal"  modal="true" appendTo="@(body)">
+            <h:form id="frmEditarAnimal">
+                <h:panelGrid columns="2" id="pnlEditarAnimal">
+                    <p:outputLabel value="Código: "/>
+                    <h:outputText value="#{MBAnimal.animal.animal}"/>
+                    <p:outputLabel value="nome"/>
+                    <p:inputText value="#{MBAnimal.animal.nome}" size="30" maxlength="50"/>
+                </h:panelGrid>
+                <h:panelGrid columns="2">
+                    <p:commandButton value="Editar"
+                                     actionListener="#{MBAnimal.editarAnimal()}"
+                                     oncomplete="PF('dlgEdEditar').hide();"
+                                     update=":frmAnimal:tbAnimal
+                                     :msgGlobal"/>
+                    <p:commandButton value="Cancelar" onclick="PF('dlgEdEditar').hide();"/>      
+                </h:panelGrid>
+            </h:form>       
+        </p:dialog>
+    </ui:define>
+</ui:composition>
+

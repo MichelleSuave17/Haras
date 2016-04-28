@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/modelo_template.xhtml">    
+    <ui:define name="menu">
+        <ui:include src="/includes/menu_principal.xhtml"/>
+    </ui:define>
+    <ui:define name="conteudo">
+        <h:form id="frmEditora">
+            <p:dataTable emptyMessage="Nenhum competidor registrado" 
+                         value="#{MBCompetidor.itens}" 
+                         var="item" 
+                         paginator="true" 
+                         rows="5" 
+                         id="tbCompetidor">
+                <f:facet name="header">
+                    Competidor - Listagem
+                </f:facet>
+                <p:column headerText="Codigo" 
+                          sortBy="#{item.id_competidor}" 
+                          filterBy="#{item.id_competidor}">
+                    <h:outputText value="#{item.id_competidor}"/>
+                </p:column>
+                <p:column headerText="Nome" 
+                          sortBy="#{item.nome}" 
+                          filterBy="#{item.nome}">
+                    <h:outputText value="#{item.nome}"/>
+                </p:column>
+                <p:column headerText="Posição" 
+                          sortBy="#{item.posicao}" 
+                          filterBy="#{item.posicao}">
+                    <h:outputText value="#{item.posicao}"/>
+                </p:column>
+                <p:column headerText="Codigo Animal">
+                    <p:commandButton icon="ui-icon-trash" oncomplete="PF('dlgEdExcluir').show();" 
+                                     update=":frmExcluiEditora:pnlExcluiEditora
+                                     :msgGlobal">
+                        <f:setPropertyActionListener target="#{MBCompetidor.competidor}" value="#{item}"/>
+                    </p:commandButton>
+                    <p:commandButton icon="ui-icon-pencil" oncomplete="PF('dlgEdCompetidor').show();"
+                                     update=":frmEditarCompetidor:pnlEditarCompetidor
+                                     :msgGlobal">
+                        <f:setPropertyActionListener target="#{MBCompetidor.competidor}" value="#{item}"/>
+                    </p:commandButton>
+                </p:column>
+                <f:facet name="footer">
+                    <p:commandButton value="Novo" 
+                                     actionListener="#{MBCompetidor.prepararEditora()}" 
+                                     oncomplete="PF('dlgEdNovo').show();" 
+                                     update=":frmCadastraCompetidor:pnlCadastraCompetidor
+                                     :msgGlobal"/>
+                </f:facet>   
+            </p:dataTable>  
+        </h:form>
+        <!--CADASTRAR -->
+        <p:dialog widgetVar="dlgEdNovo" 
+                  closable="false" 
+                  draggable="false" 
+                  resizable="false" 
+                  header="Novo Competidor" 
+                  modal="true" 
+                  appendTo="@(body)">
+            <h:form id="frmCadastraCompetidor">
+                <h:panelGrid columns="2" id="pnlCadastraCompetidor">
+                    <p:outputLabel value="Raca "/>
+                    <p:inputText size="30" maxlength="50" value="#{MBCompetidor.competidor.raca}"/>
+                </h:panelGrid>
+                <h:panelGrid columns="2">
+                    <p:commandButton value="Gravar"
+                                     actionListener="#{MBCompetidor.novaCompetidor()}"
+                                     oncomplete="PF('dlgEdNovo').hide();"
+                                     update=":frmCompetidor:tbCompetidor
+                                     :msgGlobal"/>
+                    <p:commandButton value="Cancelar" onclick="PF('dlgEdNovo').hide();"/>      
+                </h:panelGrid>
+            </h:form>       
+        </p:dialog> 
+
+        <!--EXCLUIR-->
+        <p:dialog widgetVar="dlgEdExcluir"  closable="false"  draggable="false" 
+                  resizable="false" header="Excluir Competidor" modal="true" appendTo="@(body)">
+            <h:form id="frmExcluiCompetidor">
+                
+                <h:panelGrid columns="2" id="pnlExcluiCompetidor">
+                    <p:outputLabel value="Código: "/>
+                    <h:outputText value="#{MBCompetidor.competidor.competidor}"/>
+                    <p:outputLabel value="Raca"/>
+                    <h:outputText value="#{MBCompetidor.competidor.competidor}"/>
+                </h:panelGrid>
+                <h:panelGrid columns="2">
+                    <p:commandButton value="Excluir"
+                                     actionListener="#{MBCompetidor.excluirCompetidor()}"
+                                     oncomplete="PF('dlgEdExcluir').hide();"
+                                     update=":frmCompetidor:tbCompetidor
+                                     :msgGlobal"/>
+                    <p:commandButton value="Cancelar" onclick="PF('dlgEdExcluir').hide();"/>      
+                </h:panelGrid>
+            </h:form>       
+        </p:dialog> 
+
+
+        <!--EDITAR -->
+        <p:dialog widgetVar="dlgEdEditar" closable="false" draggable="false" 
+                  resizable="false"  header="Editar Competidor"  modal="true" appendTo="@(body)">
+            <h:form id="frmEditarCompetidor">
+                <h:panelGrid columns="2" id="pnlEditarCompetidor">
+                    <p:outputLabel value="Código: "/>
+                    <h:outputText value="#{MBCompetidor.competidor.Competidor}"/>
+                    <p:outputLabel value="Razão Social"/>
+                    <p:inputText value="#{MBEditora.competidor.raca}" size="30" maxlength="50"/>
+                </h:panelGrid>
+                <h:panelGrid columns="2">
+                    <p:commandButton value="Editar"
+                                     actionListener="#{MBCompetidor.editarCompetidor()}"
+                                     oncomplete="PF('dlgEdEditar').hide();"
+                                     update=":frmCompetidor:tbCompetidor
+                                     :msgGlobal"/>
+                    <p:commandButton value="Cancelar" onclick="PF('dlgEdEditar').hide();"/>      
+                </h:panelGrid>
+            </h:form>       
+        </p:dialog>
+    </ui:define>
+</ui:composition>
