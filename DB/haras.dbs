@@ -8,26 +8,28 @@
 			<index name="pk_animais" unique="PRIMARY_KEY" >
 				<column name="id_animais" />
 			</index>
-			<fk name="fk_animais" to_schema="haras" to_table="competidor" >
-				<fk_column name="id_animais" pk="cod_animais" />
-			</fk>
 			<storage><![CDATA[engine=InnoDB]]></storage>
 		</table>
 		<table name="competidor" >
 			<column name="id_competidor" type="int" jt="4" mandatory="y" autoincrement="y" />
 			<column name="nome" type="varchar" length="255" jt="12" />
-			<column name="posição" type="int" jt="4" />
-			<column name="cod_animais" type="int" jt="4" mandatory="y" />
+			<column name="posicao" type="int" jt="4" />
+			<column name="cod_animais" type="int" jt="4" />
+			<column name="modalidade" type="varchar" length="255" jt="12" />
 			<index name="pk_competidor" unique="PRIMARY_KEY" >
 				<column name="id_competidor" />
 			</index>
-			<index name="pk_competidor_0" unique="UNIQUE" >
+			<index name="idx_competidor" unique="NORMAL" >
 				<column name="cod_animais" />
 			</index>
+			<fk name="fk_competidor" to_schema="haras" to_table="animais" >
+				<fk_column name="cod_animais" pk="id_animais" />
+			</fk>
 			<storage><![CDATA[engine=InnoDB]]></storage>
 		</table>
 	</schema>
 	<connector name="MySql" database="MySql" driver_class="com.mysql.jdbc.Driver" driver_jar="mysql-connector-java-5.1.34-bin.jar" host="localhost" port="3306" instance="mysql" user="root" passwd="MTIzNDU=" schema_mapping="" />
+	<connector name="MySql_001" database="MySql" driver_class="com.mysql.jdbc.Driver" driver_jar="mysql-connector-java-5.1.34-bin.jar" host="localhost" port="3306" instance="mysql" user="root" passwd="MTIzNDU=" schema_mapping="" />
 	<layout id="Layout_1fd39e" name="haras" show_relation_columns="y" >
 		<entity schema="haras" name="competidor" color="b2cdf7" x="45" y="45" />
 		<entity schema="haras" name="animais" color="b2cdf7" x="390" y="45" />
