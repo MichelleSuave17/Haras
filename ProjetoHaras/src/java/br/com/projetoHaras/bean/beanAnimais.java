@@ -45,11 +45,11 @@ public class beanAnimais {
         }
     }
     
-      public void prepararAnimal() {
+      public void prepararAnimais() {
         animais = new animais();
     }
       
-      public void novoAnimal() throws ClassNotFoundException {
+      public void novoAnimais() throws ClassNotFoundException {
         try {
             AnimaisDao dao = new AnimaisDao();
             dao.salvar(animais);
@@ -65,7 +65,7 @@ public class beanAnimais {
 
     }
       
-     public void excluirAnimal() throws ClassNotFoundException {
+     public void excluirAnimais() throws ClassNotFoundException {
         try {
             AnimaisDao dao = new AnimaisDao();
             dao.excluir(animais);
@@ -80,7 +80,7 @@ public class beanAnimais {
         }
     }
      
-         public void editarAnimal() throws ClassNotFoundException {
+         public void editarAnimais() throws ClassNotFoundException {
         try {
             AnimaisDao dao = new AnimaisDao();
             dao.editar(animais);

@@ -10,15 +10,15 @@
         <ui:include src="/includes/menu_principal.xhtml"/>
     </ui:define>
     <ui:define name="conteudo">
-        <h:form id="frmAnimal">
+        <h:form id="frmAnimais">
             <p:dataTable emptyMessage="Nenhum animal registrado" 
-                         value="#{MBAnimal.itens}" 
+                         value="#{MBAnimais.itens}" 
                          var="item" 
                          paginator="true" 
                          rows="5" 
                          id="tbAnimal">
                 <f:facet name="header">
-                    Animal - Listagem
+                    Animais - Listagem
                 </f:facet>
                 <p:column headerText="Codigo" 
                           sortBy="#{item.id_animais}" 
@@ -35,23 +35,23 @@
                           filterBy="#{item.raca}">
                     <h:outputText value="#{item.raca}"/>
                 </p:column>
-                <p:column headerText="Codigo Competidor">
+                <p:column headerText="Opções">
                     <p:commandButton icon="ui-icon-trash" oncomplete="PF('dlgEdExcluir').show();" 
-                                     update=":frmExcluiAnimal:pnlExcluiAnimal
+                                     update=":frmExcluiAnimais:pnlExcluiAnimais
                                      :msgGlobal">
-                        <f:setPropertyActionListener target="#{MBAnimal.animal}" value="#{item}"/>
+                        <f:setPropertyActionListener target="#{MBAnimais.animais}" value="#{item}"/>
                     </p:commandButton>
-                    <p:commandButton icon="ui-icon-pencil" oncomplete="PF('dlgEdAnimal').show();"
-                                     update=":frmEditarAnimal:pnlEditarAnimal
+                    <p:commandButton icon="ui-icon-pencil" oncomplete="PF('dlgEdAnimais').show();"
+                                     update=":frmEditarAnimais:pnlEditarAnimais
                                      :msgGlobal">
-                        <f:setPropertyActionListener target="#{MBAnimal.animal}" value="#{item}"/>
+                        <f:setPropertyActionListener target="#{MBAnimais.animais}" value="#{item}"/>
                     </p:commandButton>
                 </p:column>
                 <f:facet name="footer">
                     <p:commandButton value="Novo" 
-                                     actionListener="#{MBAnimal.prepararAnimal()}" 
+                                     actionListener="#{MBAnimais.prepararAnimais()}" 
                                      oncomplete="PF('dlgEdNovo').show();" 
-                                     update=":frmCadastraAnimal:pnlCadastraAnimal
+                                     update=":frmCadastraAnimais:pnlCadastraAnimais
                                      :msgGlobal"/>
                 </f:facet>   
             </p:dataTable>  
@@ -64,16 +64,18 @@
                   header="Novo Animal" 
                   modal="true" 
                   appendTo="@(body)">
-            <h:form id="frmCadastraAnimal">
-                <h:panelGrid columns="2" id="pnlCadastraAnimal">
+            <h:form id="frmCadastraAnimais">
+                <h:panelGrid columns="2" id="pnlCadastraAnimais">
+                    <p:outputLabel value="Nome "/>
+                    <p:inputText size="30" maxlength="50" value="#{MBAnimais.animais.raca}"/>
                     <p:outputLabel value="Raca "/>
-                    <p:inputText size="30" maxlength="50" value="#{MBAnimal.animal.raca}"/>
+                    <p:inputText size="30" maxlength="50" value="#{MBAnimais.animais.raca}"/>
                 </h:panelGrid>
                 <h:panelGrid columns="2">
                     <p:commandButton value="Gravar"
-                                     actionListener="#{MBAnimal.novaAnimal()}"
+                                     actionListener="#{MBAnimais.novaAnimais()}"
                                      oncomplete="PF('dlgEdNovo').hide();"
-                                     update=":frmAnimal:tbAnimal
+                                     update=":frmCadastraAnimais:pnlCadastraAnimais
                                      :msgGlobal"/>
                     <p:commandButton value="Cancelar" onclick="PF('dlgEdNovo').hide();"/>      
                 </h:panelGrid>
@@ -82,20 +84,22 @@
 
         <!--EXCLUIR-->
         <p:dialog widgetVar="dlgEdExcluir"  closable="false"  draggable="false" 
-                  resizable="false" header="Excluir Animal" modal="true" appendTo="@(body)">
-            <h:form id="frmExcluiCompetidor">
+                  resizable="false" header="Excluir Editora" modal="true" appendTo="@(body)">
+            <h:form id="frmExcluiAnimais">
                 
-                <h:panelGrid columns="2" id="pnlExcluiAnimal">
+                <h:panelGrid columns="2" id="pnlExcluiAnimais">
                     <p:outputLabel value="Código: "/>
-                    <h:outputText value="#{MBAnimal.animal.animal}"/>
-                    <p:outputLabel value="Raca"/>
-                    <h:outputText value="#{MBAnimal.animal.animal}"/>
+                    <h:outputText value="#{MBAnimais.animais.id_animais}"/>
+                    <p:outputLabel value="Raça"/>
+                    <h:outputText value="#{MBAnimais.animais.raca}"/>
+                    <p:outputLabel value="Nome"/>
+                    <h:outputText value="#{MBAnimais.animais.nome}"/>
                 </h:panelGrid>
                 <h:panelGrid columns="2">
                     <p:commandButton value="Excluir"
-                                     actionListener="#{MBAnimal.excluirAnimal()}"
+                                     actionListener="#{MBAnimais.excluirAnimais()}"
                                      oncomplete="PF('dlgEdExcluir').hide();"
-                                     update=":frmAnimal:tbAnimal
+                                     update=":frmExcluiAnimais:pnlExcluiAnimais
                                      :msgGlobal"/>
                     <p:commandButton value="Cancelar" onclick="PF('dlgEdExcluir').hide();"/>      
                 </h:panelGrid>
@@ -106,18 +110,18 @@
         <!--EDITAR -->
         <p:dialog widgetVar="dlgEdEditar" closable="false" draggable="false" 
                   resizable="false"  header="Editar Animal"  modal="true" appendTo="@(body)">
-            <h:form id="frmEditarAnimal">
-                <h:panelGrid columns="2" id="pnlEditarAnimal">
+            <h:form id="frmEditarAnimais">
+                <h:panelGrid columns="2" id="pnlEditarAnimais">
                     <p:outputLabel value="Código: "/>
-                    <h:outputText value="#{MBAnimal.animal.animal}"/>
+                    <h:outputText value="#{MBAnimais.animais.animais}"/>
                     <p:outputLabel value="nome"/>
-                    <p:inputText value="#{MBAnimal.animal.nome}" size="30" maxlength="50"/>
+                    <p:inputText value="#{MBAnimais.animais.nome}" size="30" maxlength="50"/>
                 </h:panelGrid>
                 <h:panelGrid columns="2">
                     <p:commandButton value="Editar"
-                                     actionListener="#{MBAnimal.editarAnimal()}"
+                                     actionListener="#{MBAnimais.editarAnimais()}"
                                      oncomplete="PF('dlgEdEditar').hide();"
-                                     update=":frmAnimal:tbAnimal
+                                     update=":frmEditarAnimais:pnlEditarAnimais
                                      :msgGlobal"/>
                     <p:commandButton value="Cancelar" onclick="PF('dlgEdEditar').hide();"/>      
                 </h:panelGrid>
