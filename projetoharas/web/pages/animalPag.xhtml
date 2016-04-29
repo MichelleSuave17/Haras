@@ -39,29 +39,19 @@
                     <p:commandButton icon="ui-icon-trash" oncomplete="PF('dlgEdExcluir').show();" 
                                      update=":frmExcluiAnimais:pnlExcluiAnimais
                                      :msgGlobal">
-<<<<<<< HEAD
                         <f:setPropertyActionListener target="#{MBAnimais.animal}" value="#{item}"/>
-=======
                         <f:setPropertyActionListener target="#{MBAnimais.animais}" value="#{item}"/>
->>>>>>> e63aacfcc66c08e36bab777b0688c1ca15e8eb2b
                     </p:commandButton>
                     <p:commandButton icon="ui-icon-pencil" oncomplete="PF('dlgEdAnimais').show();"
                                      update=":frmEditarAnimais:pnlEditarAnimais
                                      :msgGlobal">
-<<<<<<< HEAD
                         <f:setPropertyActionListener target="#{MBAnimais.animal}" value="#{item}"/>
-=======
                         <f:setPropertyActionListener target="#{MBAnimais.animais}" value="#{item}"/>
->>>>>>> e63aacfcc66c08e36bab777b0688c1ca15e8eb2b
                     </p:commandButton>
                 </p:column>
                 <f:facet name="footer">
-                    <p:commandButton value="Novo" 
-<<<<<<< HEAD
-                                     actionListener="#{MBAnimais.prepararAnimal()}" 
-=======
+                    <p:commandButton value="Novo"  
                                      actionListener="#{MBAnimais.prepararAnimais()}" 
->>>>>>> e63aacfcc66c08e36bab777b0688c1ca15e8eb2b
                                      oncomplete="PF('dlgEdNovo').show();" 
                                      update=":frmCadastraAnimais:pnlCadastraAnimais
                                      :msgGlobal"/>
@@ -79,21 +69,17 @@
             <h:form id="frmCadastraAnimais">
                 <h:panelGrid columns="2" id="pnlCadastraAnimais">
                     <p:outputLabel value="Nome "/>
-                    <p:inputText size="30" maxlength="50" value="#{MBAnimais.animais.raca}"/>
+                    <p:inputText size="30" maxlength="50" value="#{MBAnimais.animais.nome}"/>
                     <p:outputLabel value="Raca "/>
-<<<<<<< HEAD
                     <p:inputText size="30" maxlength="50" value="#{MBAnimais.animal.raca}"/>
                 </h:panelGrid>
                 <h:panelGrid columns="2">
-                    <p:commandButton value="Gravar"
-                                     actionListener="#{MBAnimais.novaAnimal()}"
-=======
+                    <p:commandButton value="Gravar"actionListener="#{MBAnimais.novaAnimal()}"
                     <p:inputText size="30" maxlength="50" value="#{MBAnimais.animais.raca}"/>
                 </h:panelGrid>
                 <h:panelGrid columns="2">
                     <p:commandButton value="Gravar"
                                      actionListener="#{MBAnimais.novaAnimais()}"
->>>>>>> e63aacfcc66c08e36bab777b0688c1ca15e8eb2b
                                      oncomplete="PF('dlgEdNovo').hide();"
                                      update=":frmCadastraAnimais:pnlCadastraAnimais
                                      :msgGlobal"/>
@@ -109,7 +95,6 @@
                 
                 <h:panelGrid columns="2" id="pnlExcluiAnimais">
                     <p:outputLabel value="Código: "/>
-<<<<<<< HEAD
                     <h:outputText value="#{MBAnimais.animal.animal}"/>
                     <p:outputLabel value="Raca"/>
                     <h:outputText value="#{MBAnimais.animal.animal}"/>
@@ -117,7 +102,6 @@
                 <h:panelGrid columns="2">
                     <p:commandButton value="Excluir"
                                      actionListener="#{MBAnimais.excluirAnimal()}"
-=======
                     <h:outputText value="#{MBAnimais.animais.id_animais}"/>
                     <p:outputLabel value="Raça"/>
                     <h:outputText value="#{MBAnimais.animais.raca}"/>
@@ -127,7 +111,6 @@
                 <h:panelGrid columns="2">
                     <p:commandButton value="Excluir"
                                      actionListener="#{MBAnimais.excluirAnimais()}"
->>>>>>> e63aacfcc66c08e36bab777b0688c1ca15e8eb2b
                                      oncomplete="PF('dlgEdExcluir').hide();"
                                      update=":frmExcluiAnimais:pnlExcluiAnimais
                                      :msgGlobal"/>
@@ -143,15 +126,12 @@
             <h:form id="frmEditarAnimais">
                 <h:panelGrid columns="2" id="pnlEditarAnimais">
                     <p:outputLabel value="Código: "/>
-<<<<<<< HEAD
                     <h:outputText value="#{MBAnimais.animal.animal}"/>
                     <p:outputLabel value="nome"/>
                     <p:inputText value="#{MBAnimais.animal.nome}" size="30" maxlength="50"/>
                 </h:panelGrid>
                 <h:panelGrid columns="2">
-                    <p:commandButton value="Editar"
-                                     actionListener="#{MBAnimais.editarAnimal()}"
-=======
+                    <p:commandButton value="Editar" actionListener="#{MBAnimais.editarAnimal()}"
                     <h:outputText value="#{MBAnimais.animais.animais}"/>
                     <p:outputLabel value="nome"/>
                     <p:inputText value="#{MBAnimais.animais.nome}" size="30" maxlength="50"/>
@@ -159,7 +139,6 @@
                 <h:panelGrid columns="2">
                     <p:commandButton value="Editar"
                                      actionListener="#{MBAnimais.editarAnimais()}"
->>>>>>> e63aacfcc66c08e36bab777b0688c1ca15e8eb2b
                                      oncomplete="PF('dlgEdEditar').hide();"
                                      update=":frmEditarAnimais:pnlEditarAnimais
                                      :msgGlobal"/>
