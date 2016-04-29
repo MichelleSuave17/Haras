@@ -10,7 +10,7 @@
         <ui:include src="/includes/menu_principal.xhtml"/>
     </ui:define>
     <ui:define name="conteudo">
-        <h:form id="frmEditora">
+        <h:form id="frmCompetidor">
             <p:dataTable emptyMessage="Nenhum competidor registrado" 
                          value="#{MBCompetidor.itens}" 
                          var="item" 
@@ -35,9 +35,19 @@
                           filterBy="#{item.posicao}">
                     <h:outputText value="#{item.posicao}"/>
                 </p:column>
-                <p:column headerText="Codigo Animal">
+                    <p:column headerText="Modalidade" 
+                          sortBy="#{item.modalidade}" 
+                          filterBy="#{item.modalidade}">
+                    <h:outputText value="#{item.modalidade}"/>
+                    </p:column>
+                    <p:column headerText="Código Animal" 
+                          sortBy="#{item.cod_animais}" 
+                          filterBy="#{item.cod_animais}">
+                    <h:outputText value="#{item.cod_animais}"/>
+                </p:column>
+                <p:column headerText="Opções">
                     <p:commandButton icon="ui-icon-trash" oncomplete="PF('dlgEdExcluir').show();" 
-                                     update=":frmExcluiEditora:pnlExcluiEditora
+                                     update=":frmExcluiCompetidor:pnlExcluiCompetidor
                                      :msgGlobal">
                         <f:setPropertyActionListener target="#{MBCompetidor.competidor}" value="#{item}"/>
                     </p:commandButton>
@@ -46,14 +56,14 @@
                                      :msgGlobal">
                         <f:setPropertyActionListener target="#{MBCompetidor.competidor}" value="#{item}"/>
                     </p:commandButton>
-                </p:column>
+                  </p:column>
                 <f:facet name="footer">
                     <p:commandButton value="Novo" 
-                                     actionListener="#{MBCompetidor.prepararEditora()}" 
+                                     actionListener="#{MBCompetidor.prepararCompetidor()}" 
                                      oncomplete="PF('dlgEdNovo').show();" 
                                      update=":frmCadastraCompetidor:pnlCadastraCompetidor
                                      :msgGlobal"/>
-                </f:facet>   
+                </f:facet>     
             </p:dataTable>  
         </h:form>
         <!--CADASTRAR -->
@@ -66,8 +76,12 @@
                   appendTo="@(body)">
             <h:form id="frmCadastraCompetidor">
                 <h:panelGrid columns="2" id="pnlCadastraCompetidor">
-                    <p:outputLabel value="Raca "/>
-                    <p:inputText size="30" maxlength="50" value="#{MBCompetidor.competidor.raca}"/>
+                    <p:outputLabel value="Nome "/>
+                    <p:inputText size="30" maxlength="50" value="#{MBCompetidor.competidor.nome}"/>
+                    <p:outputLabel value="Posição "/>
+                    <p:inputText size="30" maxlength="50" value="#{MBCompetidor.competidor.posicao}"/>
+                    <p:outputLabel value="Modalidade"/>
+                    <p:inputText size="30" maxlength="50" value="#{MBCompetidor.competidor.modalidade}"/>
                 </h:panelGrid>
                 <h:panelGrid columns="2">
                     <p:commandButton value="Gravar"
@@ -87,9 +101,15 @@
                 
                 <h:panelGrid columns="2" id="pnlExcluiCompetidor">
                     <p:outputLabel value="Código: "/>
-                    <h:outputText value="#{MBCompetidor.competidor.competidor}"/>
-                    <p:outputLabel value="Raca"/>
-                    <h:outputText value="#{MBCompetidor.competidor.competidor}"/>
+                    <h:outputText value="#{MBCompetidor.competidor.cod_animais}"/>
+                    <p:outputLabel value="Nome: "/>
+                    <h:outputText value="#{MBCompetidor.competidor.nome}"/>
+                    <p:outputLabel value="Posição: "/>
+                    <h:outputText value="#{MBCompetidor.competidor.posicao}"/>
+                    <p:outputLabel value="Modalidade: "/>
+                    <h:outputText value="#{MBCompetidor.competidor.modalidade}"/>
+                    <p:outputLabel value="Competidor: "/>
+                    <h:outputText value="#{MBCompetidor.competidor.id_competidor}"/>
                 </h:panelGrid>
                 <h:panelGrid columns="2">
                     <p:commandButton value="Excluir"
