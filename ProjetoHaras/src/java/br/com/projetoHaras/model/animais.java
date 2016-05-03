@@ -1,7 +1,7 @@
 package br.com.projetoHaras.model;
 public class animais {
     private int id_animais;
-    private String nome;
+    private String nomeA;
     private String raca;
 
     public int getId_animais() {
@@ -12,12 +12,12 @@ public class animais {
         this.id_animais = id_animais;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeA() {
+        return nomeA;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNomeA(String nomeA) {
+        this.nomeA = nomeA;
     }
 
     public String getRaca() {

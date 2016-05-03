@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class CompetidorDao {
         public void salvar(competidor d) throws ClassNotFoundException, SQLException{
-        String sql = "INSERT INTO competidor( nome,posicao,cod_animais,modalidade) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO competidor(nome, posicao, cod_animais, modalidade) VALUES(?, ?, ?, ?)";
         
         Connection connection = ConnectionFactory.getConnection();
         
@@ -34,7 +34,7 @@ public class CompetidorDao {
         stmt.close();
     }
          public void editar(competidor d)throws ClassNotFoundException,SQLException{
-        String sql= "UPDATE produto SET nome = ?, posicao =?, cod_animais =?, modalidade =? WHERE id_competidor = ?";
+        String sql= "UPDATE competidor SET nome = ?, posicao =?, cod_animais =?, modalidade =? WHERE id_competidor = ?";
         
         Connection connection = ConnectionFactory.getConnection();
         
@@ -87,7 +87,7 @@ public class CompetidorDao {
             e.setNome(rs.getString("nome"));
             e.setPosicao(rs.getInt("posicao"));
             e.setModalidade(rs.getString("modalidade"));
-            e.setNome(rs.getString("nome"));
+            e.setNomeA(rs.getString("cod_animais"));
            
             lista.add(e);
         }

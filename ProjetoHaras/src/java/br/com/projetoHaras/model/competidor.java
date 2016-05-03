@@ -1,5 +1,5 @@
 package br.com.projetoHaras.model;
-public class competidor {
+public class competidor extends animais{
 
     public int getId_competidor() {
         return id_competidor;
