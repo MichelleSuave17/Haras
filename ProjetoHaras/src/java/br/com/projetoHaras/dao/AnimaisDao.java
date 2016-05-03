@@ -16,7 +16,7 @@ public class AnimaisDao {
         Connection connection = ConnectionFactory.getConnection();
         
         PreparedStatement stmt = connection.prepareStatement(sql);
-        stmt.setString(1, d.getNome());
+        stmt.setString(1, d.getNomeA());
         stmt.setString(2, d.getRaca());
         stmt.execute();
         stmt.close();      
@@ -32,12 +32,12 @@ public class AnimaisDao {
         stmt.close();
     }          
         public void editar(animais d)throws ClassNotFoundException,SQLException{
-        String sql= "UPDATE produto SET nome= ?, raca =? WHERE id_animais = ?";
+        String sql= "UPDATE animais SET nome= ?, raca =? WHERE id_animais = ?";
         
         Connection connection = ConnectionFactory.getConnection();
         
         PreparedStatement stmt = connection.prepareStatement(sql);
-        stmt.setString (1, d.getNome());
+        stmt.setString (1, d.getNomeA());
         stmt.setString(2, d.getRaca());
          stmt.setInt(3, d.getId_animais()); 
         stmt.execute();
@@ -57,7 +57,7 @@ public class AnimaisDao {
            if(rs.next()){
             retorno = new animais();
             retorno.setId_animais(rs.getInt("Id_editora"));
-            retorno.setNome(rs.getString("nome"));
+            retorno.setNomeA(rs.getString("nome"));
             retorno.setRaca(rs.getString("raca"));
         }
         return retorno;
@@ -77,7 +77,7 @@ public class AnimaisDao {
         while(rs.next()){
             animais e = new animais();
             e.setId_animais(rs.getInt("id_animais"));
-            e.setNome(rs.getString("nome"));
+            e.setNomeA(rs.getString("nome"));
             e.setRaca(rs.getString("raca"));     
             lista.add(e);
         }

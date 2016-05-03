@@ -54,7 +54,7 @@ public class beanCompetidor {
             CompetidorDao dao = new CompetidorDao();
             dao.salvar(competidor);
             itens = dao.lista();
-            JSFUtil.addMsgSucesso("Competidor salva com sucesso.");
+            JSFUtil.addMsgSucesso("Competidor salvo com sucesso.");
         } catch (SQLException e) {
             e.printStackTrace();
             JSFUtil.addMsgErro(e.getMessage());
